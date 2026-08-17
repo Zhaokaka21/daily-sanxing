@@ -1,0 +1,44 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check command frontmatter
+        run: |
+          set -e
+          for f in commands/*.md skill/daily-routine/SKILL.md; do
+            # Every command file must start with a --- frontmatter block containing a description
+            if ! head -1 "$f" | grep -q '^---$'; then
+              echo "FAIL: $f does not start with frontmatter"; exit 1
+            fi
+            if ! grep -q '^description:' "$f"; then
+              echo "FAIL: $f missing description in frontmatter"; exit 1
+            fi
+            echo "OK: $f"
+          done
+
+      - name: Check internal links
+        run: |
+          set -e
+          # Markdown links to local files (docs/*.md, templates/*.md) must exist
+          for f in README.md docs/*.md; do
+            while IFS= read -r link; do
+              target="${link#*(}"
+              target="${target%)*}"
+              case "$target" in
+                http*|mailto:*|'#'*) continue ;;
+                *) if [ ! -e "$target" ]; then
+                     echo "FAIL: $f links to missing file: $target"; exit 1
+                   fi ;;
+              esac
+            done < <(grep -oP '\[[^\]]*\]\(\K[^)]*' "$f" || true)
+          done
+          echo "All internal links OK"
