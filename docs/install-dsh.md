@@ -6,7 +6,7 @@ daily-sansheng 以 **skill** 形式安装到 DSH，支持自然语言触发：�
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/<your-name>/daily-sansheng.git
+git clone https://github.com/Zhaokaka21/daily-sansheng.git
 cd daily-sansheng
 
 # 2. 复制 skill 到 DSH 技能目录

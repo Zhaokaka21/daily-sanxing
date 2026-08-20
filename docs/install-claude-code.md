@@ -6,7 +6,7 @@ daily-sansheng 以 **slash command** 形式安装到 Claude Code，两条命令�
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/<your-name>/daily-sansheng.git
+git clone https://github.com/Zhaokaka21/daily-sansheng.git
 cd daily-sansheng
 
 # 2. 复制三个命令到 Claude Code 全局命令目录

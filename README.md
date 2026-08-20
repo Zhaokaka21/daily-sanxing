@@ -39,7 +39,7 @@ A battle-tested personal daily workflow trio: **Close · Start · Reflect** — 
 ### 快速开始
 
 ```bash
-git clone https://github.com/<your-name>/daily-sansheng.git
+git clone https://github.com/Zhaokaka21/daily-sansheng.git
 cd daily-sansheng
 
 # Claude Code
@@ -104,7 +104,7 @@ Three commands form a closed loop:
 ### Quick start
 
 ```bash
-git clone https://github.com/<your-name>/daily-sansheng.git
+git clone https://github.com/Zhaokaka21/daily-sansheng.git
 cd daily-sansheng
 
 # Claude Code
