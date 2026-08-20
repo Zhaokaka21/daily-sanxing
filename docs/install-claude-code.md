@@ -1,13 +1,13 @@
 # 安装指南 — Claude Code
 
-daily-sansheng 以 **slash command** 形式安装到 Claude Code，两条命令就能用。
+daily-sanxing 以 **slash command** 形式安装到 Claude Code，两条命令就能用。
 
 ## 安装
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/Zhaokaka21/daily-sansheng.git
-cd daily-sansheng
+git clone https://github.com/Zhaokaka21/daily-sanxing.git
+cd daily-sanxing
 
 # 2. 复制三个命令到 Claude Code 全局命令目录
 mkdir -p ~/.claude/commands

@@ -1,13 +1,13 @@
 # 安装指南 — DeepSeek Harness（DSH）
 
-daily-sansheng 以 **skill** 形式安装到 DSH，支持自然语言触发：直接说「日启」「日结」「反思」即可。
+daily-sanxing 以 **skill** 形式安装到 DSH，支持自然语言触发：直接说「日启」「日结」「反思」即可。
 
 ## 安装
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/Zhaokaka21/daily-sansheng.git
-cd daily-sansheng
+git clone https://github.com/Zhaokaka21/daily-sanxing.git
+cd daily-sanxing
 
 # 2. 复制 skill 到 DSH 技能目录
 #    Windows: %USERPROFILE%\.dsh\skills\
