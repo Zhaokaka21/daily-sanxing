@@ -43,26 +43,24 @@ node "$SESSION_REPORT_DIR/analyze-sessions.mjs" --json --since 14d > .reflect-se
 
 未配置 `SESSION_REPORT_DIR` 时跳过本步，token 审计只做静态检查（见第 3 步）。
 
-### 2. 列出所有领域并找活跃日志（默认单区，`双区` 参数跨区）
+### 2. 列出领域目录（默认单区，`双区` 参数跨区）
 
 ```bash
 # 当前区
 for d in "${LOG_ROOT:-0-工作日志}"/*/ ${EXTRA_LOG_DIRS:-运动日志}/; do
-  recent=$(ls -t "$d"*.md 2>/dev/null | grep -v "_模板\|_规则\|_计划\|_方案" | head -5)
-  [ -n "$recent" ] && echo "=== 当前区/$d ===" && echo "$recent"
+  [ -d "$d" ] && echo "=== 当前区/$d ==="
 done
 # 仅「双区」模式追加：第二工作区（绝对路径）；单区模式跳过
 for d in "$SECONDARY_WORKSPACE/日志/工作日志/"*/; do
-  recent=$(ls -t "$d"*.md 2>/dev/null | grep -v "_模板\|_规则\|_计划\|_方案" | head -5)
-  [ -n "$recent" ] && echo "=== 第二区/$d ===" && echo "$recent"
+  [ -d "$d" ] && echo "=== 第二区/$d ==="
 done
 ```
 
 ### 3. 读取 14 天内的所有日结日志（默认单区）
 
-只读活跃领域（14 天内有更新的）。跳过超过 14 天未更新的沉寂领域。
-- **当前区**：`LOG_ROOT` + `EXTRA_LOG_DIRS`（日结 `YYYY-MM-DD.md` + 报告文件，均按修改时间取 14 天内）
-- **双区模式追加**：`SECONDARY_WORKSPACE/日志/工作日志/*/` 的 `YYYY-MM-DD.md`（按修改时间取 14 天内）+ 第二区行动板
+按文件名中的 `YYYY-MM-DD` 或记录内的事件日期判断是否落在本期；修改时间只帮助发现候选文件。不要用“最近五篇”代替全期记录。确无本期记录的领域可略过，并在覆盖说明中列出。
+- **当前区**：检查 `LOG_ROOT` + `EXTRA_LOG_DIRS` 的本期日期日志及相关报告；上次反思用于复核改进是否生效。
+- **双区模式追加**：检查 `SECONDARY_WORKSPACE/日志/工作日志/*/` 的本期日期日志及第二区行动板。
 - 读取当前区行动板（`BOARD_FILE`）确认当前任务状态。
 - 如果工作区可访问同期间会话（包括已归档会话），一并核对关键决策、用户纠正和实际交付；按消息日期确定是否属于本期。文件修改时间仅用于发现候选，不能代替工作发生日期。列明未覆盖的聊天或日期；缺少日结不等于当天没有工作。
 
